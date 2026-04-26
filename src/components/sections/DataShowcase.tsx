@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Play, RotateCcw } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const rawRows = [
   { cust_id: 'NULL', name: 'ahmed r.', phone: '01711??????', segment: '—' },
@@ -20,57 +21,51 @@ const cleanRows = [
 
 const cols = ['cust_id', 'name', 'phone', 'segment'] as const
 
-const isProblematicRow = (row: Record<string, string>, i: number) =>
-  i === 0 || i === 2 || Object.values(row).some((v) => v === 'NULL' || v === 'N/A' || v === '—' || v === 'AHMED R' || v === 'KARIM md' || v === 'retail' || v === 'RETAIL' || v === 'wholesale')
+function isProblematic(row: Record<string, string>, i: number) {
+  return i === 0 || i === 2 || ['NULL', 'N/A', 'AHMED R', 'KARIM md', 'retail', 'RETAIL', 'wholesale'].some(v => Object.values(row).includes(v))
+}
 
 export function DataShowcase() {
   const [view, setView] = useState<'raw' | 'clean'>('raw')
   const isRaw = view === 'raw'
 
   return (
-    <section id="data-showcase" className="section-pad mx-auto max-w-7xl py-24 border-t border-zinc-100">
-      {/* Header */}
+    <section id="data-showcase" className="section-pad mx-auto max-w-7xl py-24 border-t border-zinc-100 dark:border-zinc-800">
       <p className="text-xs font-semibold uppercase tracking-widest text-brand-600 mb-3">
         Data showcase
       </p>
-      <h2 className="text-3xl font-medium tracking-tight mb-3 text-zinc-900">
+      <h2 className="text-3xl font-medium tracking-tight mb-3 text-zinc-900 dark:text-zinc-50">
         See the transformation
       </h2>
       <p className="text-muted mb-10 max-w-lg text-base leading-relaxed">
-        We don't just describe our data work — we show it. This is the kind of cleanup Tritium
-        Global does before any system or analytics layer touches your data.
+        We don't just describe our data work — we show it. This is exactly what happens before any system or analytics layer touches your data.
       </p>
 
       {/* Controls */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
-        <div className="flex rounded-lg border border-zinc-200 overflow-hidden text-sm font-medium">
+      <div className="flex flex-wrap items-center gap-3 mb-5">
+        <div className="flex rounded-lg border border-zinc-200 dark:border-zinc-700 overflow-hidden text-sm font-medium bg-white dark:bg-zinc-900">
           <button
             onClick={() => setView('raw')}
-            className="flex items-center gap-2 px-4 py-2 transition-colors"
-            style={{
-              backgroundColor: isRaw ? '#FEF2F2' : 'white',
-              color: isRaw ? '#dc2626' : '#6b7280',
-              borderRight: '1px solid #e5e7eb',
-            }}
+            className={cn(
+              'flex items-center gap-2 px-4 py-2 border-r border-zinc-200 dark:border-zinc-700 transition-colors',
+              isRaw
+                ? 'bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400'
+                : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800'
+            )}
           >
-            <span
-              className="h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: isRaw ? '#dc2626' : '#d1d5db' }}
-            />
+            <span className={cn('h-1.5 w-1.5 rounded-full transition-colors', isRaw ? 'bg-red-500' : 'bg-zinc-300 dark:bg-zinc-600')} />
             Raw input
           </button>
           <button
             onClick={() => setView('clean')}
-            className="flex items-center gap-2 px-4 py-2 transition-colors"
-            style={{
-              backgroundColor: !isRaw ? '#F0FDF4' : 'white',
-              color: !isRaw ? '#15803d' : '#6b7280',
-            }}
+            className={cn(
+              'flex items-center gap-2 px-4 py-2 transition-colors',
+              !isRaw
+                ? 'bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400'
+                : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800'
+            )}
           >
-            <span
-              className="h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: !isRaw ? '#15803d' : '#d1d5db' }}
-            />
+            <span className={cn('h-1.5 w-1.5 rounded-full transition-colors', !isRaw ? 'bg-green-500' : 'bg-zinc-300 dark:bg-zinc-600')} />
             Clean output
           </button>
         </div>
@@ -86,7 +81,7 @@ export function DataShowcase() {
         ) : (
           <button
             onClick={() => setView('raw')}
-            className="flex items-center gap-1.5 h-9 px-4 rounded-lg text-sm font-medium border border-zinc-200 text-zinc-600 hover:border-zinc-400 hover:bg-zinc-50 transition-colors bg-white"
+            className="flex items-center gap-1.5 h-9 px-4 rounded-lg text-sm font-medium border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
           >
             <RotateCcw size={12} />
             Reset
@@ -96,36 +91,34 @@ export function DataShowcase() {
 
       {/* Panel */}
       <div
-        className="rounded-2xl border overflow-hidden transition-colors duration-300"
-        style={{
-          borderColor: isRaw ? '#fecaca' : '#bbf7d0',
-          backgroundColor: isRaw ? 'rgb(254 242 242 / 0.35)' : 'rgb(240 253 244 / 0.35)',
-        }}
+        className={cn(
+          'rounded-2xl border overflow-hidden transition-colors duration-300',
+          isRaw
+            ? 'border-red-200 dark:border-red-900/50 bg-red-50/30 dark:bg-red-950/10'
+            : 'border-green-200 dark:border-green-900/50 bg-green-50/30 dark:bg-green-950/10'
+        )}
       >
         {/* Panel header */}
         <div
-          className="flex items-center justify-between px-5 py-3 border-b text-xs font-semibold uppercase tracking-wider transition-colors duration-300"
-          style={{
-            borderColor: isRaw ? '#fecaca' : '#bbf7d0',
-            backgroundColor: isRaw ? '#FEF2F2' : '#F0FDF4',
-            color: isRaw ? '#dc2626' : '#15803d',
-          }}
+          className={cn(
+            'flex items-center justify-between px-5 py-3 border-b text-xs font-semibold uppercase tracking-wider transition-colors duration-300',
+            isRaw
+              ? 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400'
+              : 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-900/50 text-green-700 dark:text-green-400'
+          )}
         >
           <div className="flex items-center gap-2">
-            <span
-              className="h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: isRaw ? '#dc2626' : '#15803d' }}
-            />
+            <span className={cn('h-1.5 w-1.5 rounded-full', isRaw ? 'bg-red-500' : 'bg-green-500')} />
             {isRaw ? 'Raw input — messy' : 'Cleaned output — structured'}
           </div>
-          <span className="text-[10px] font-normal" style={{ opacity: 0.75 }}>
+          <span className="text-[10px] font-normal opacity-75 hidden sm:inline">
             {isRaw
               ? '5 rows · 1 null · 2 duplicates · inconsistent formats'
               : '3 rows · deduplicated · normalized · validated'}
           </span>
         </div>
 
-        {/* Animated table swap */}
+        {/* Animated table */}
         <AnimatePresence mode="wait">
           <motion.div
             key={view}
@@ -137,9 +130,9 @@ export function DataShowcase() {
           >
             <table className="w-full text-xs font-mono">
               <thead>
-                <tr className="border-b border-zinc-100">
+                <tr className="border-b border-zinc-200/60 dark:border-zinc-700/60">
                   {cols.map((col) => (
-                    <th key={col} className="text-left px-5 py-2.5 text-zinc-400 font-normal">
+                    <th key={col} className="text-left px-5 py-2.5 text-zinc-400 dark:text-zinc-500 font-normal">
                       {col}
                     </th>
                   ))}
@@ -147,14 +140,20 @@ export function DataShowcase() {
               </thead>
               <tbody>
                 {(isRaw ? rawRows : cleanRows).map((row, i) => {
-                  const bad = isRaw && isProblematicRow(row as Record<string, string>, i)
+                  const bad = isRaw && isProblematic(row as Record<string, string>, i)
                   return (
-                    <tr key={i} className="border-b border-zinc-50 last:border-0">
+                    <tr key={i} className="border-b border-zinc-100 dark:border-zinc-800/60 last:border-0">
                       {cols.map((col) => (
                         <td
                           key={col}
-                          className="px-5 py-2"
-                          style={{ color: isRaw ? (bad ? '#dc2626' : '#374151') : '#15803d' }}
+                          className={cn(
+                            'px-5 py-2 transition-colors',
+                            isRaw
+                              ? bad
+                                ? 'text-red-500 dark:text-red-400'
+                                : 'text-zinc-600 dark:text-zinc-300'
+                              : 'text-green-700 dark:text-green-400'
+                          )}
                         >
                           {(row as Record<string, string>)[col]}
                         </td>
@@ -167,10 +166,10 @@ export function DataShowcase() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Footer caption (clean only) */}
+        {/* Clean footer */}
         {!isRaw && (
-          <div className="px-5 py-3 border-t border-green-100 bg-green-50/50">
-            <p className="text-xs text-brand-600">
+          <div className="px-5 py-3 border-t border-green-200 dark:border-green-900/50 bg-green-50/50 dark:bg-green-950/10">
+            <p className="text-xs text-brand-600 dark:text-brand-400">
               ✓ Deduplicated · Normalized · Null-handled · Standardized
             </p>
           </div>

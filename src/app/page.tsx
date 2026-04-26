@@ -3,6 +3,7 @@ import { Services } from '@/components/sections/Services'
 import { DataShowcase } from '@/components/sections/DataShowcase'
 import { Projects } from '@/components/sections/Projects'
 import { WhyUs } from '@/components/sections/WhyUs'
+import { ProductSpotlight } from '@/components/sections/ProductSpotlight'
 import { CtaSection } from '@/components/sections/CtaSection'
 import { getAllServices, getAllProjects } from '@/lib/content'
 
@@ -17,6 +18,7 @@ export default function HomePage() {
       <DataShowcase />
       <Projects projects={projects} />
       <WhyUs />
+      <ProductSpotlight />
       <CtaSection />
     </>
   )

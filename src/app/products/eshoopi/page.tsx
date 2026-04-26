@@ -72,9 +72,9 @@ export default function EshoopiPage() {
       </p>
 
       {/* Early access CTA */}
-      <div className="p-6 md:p-8 rounded-2xl border border-amber-200 bg-amber-50 mb-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+      <div className="p-6 md:p-8 rounded-2xl border border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/20 mb-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
         <div>
-          <p className="font-medium mb-1 text-zinc-900">Join the early access programme</p>
+          <p className="font-medium mb-1 text-zinc-900 dark:text-zinc-100">Join the early access programme</p>
           <p className="text-sm text-muted leading-relaxed max-w-md">
             We are onboarding a small cohort of B2B retailers in Bangladesh for the initial launch.
             Early access members shape the product roadmap.
@@ -93,7 +93,7 @@ export default function EshoopiPage() {
         <p className="text-xs font-semibold uppercase tracking-widest text-brand-600 mb-3">
           The problem
         </p>
-        <h2 className="text-3xl font-medium tracking-tight mb-6 max-w-2xl text-zinc-900 leading-snug">
+        <h2 className="text-3xl font-medium tracking-tight mb-6 max-w-2xl text-zinc-900 dark:text-zinc-50 leading-snug">
           Most B2B businesses in Bangladesh are flying blind on their customers.
         </h2>
         <p className="text-muted max-w-2xl leading-relaxed mb-8 text-base">
@@ -104,8 +104,8 @@ export default function EshoopiPage() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {useCases.map((uc) => (
-            <div key={uc.who} className="p-5 rounded-xl border border-zinc-200 bg-zinc-50">
-              <p className="font-medium text-sm mb-2 text-zinc-900">{uc.who}</p>
+            <div key={uc.who} className="p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+              <p className="font-medium text-sm mb-2 text-zinc-900 dark:text-zinc-100">{uc.who}</p>
               <p className="text-sm text-muted leading-relaxed">{uc.pain}</p>
             </div>
           ))}
@@ -124,9 +124,9 @@ export default function EshoopiPage() {
           {features.map((f) => (
             <div
               key={f.title}
-              className="p-6 rounded-2xl border border-zinc-200 hover:border-brand-200 transition-colors"
+              className="p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-brand-200 dark:hover:border-brand-800 hover:shadow-sm transition-all"
             >
-              <h3 className="font-medium mb-2 text-zinc-900">{f.title}</h3>
+              <h3 className="font-medium mb-2 text-zinc-900 dark:text-zinc-100">{f.title}</h3>
               <p className="text-sm text-muted leading-relaxed">{f.desc}</p>
             </div>
           ))}
