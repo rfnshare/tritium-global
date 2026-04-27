@@ -20,7 +20,7 @@ export function Projects({ projects }: { projects: Project[] }) {
         Real work, real systems
       </h2>
       <p className="text-muted mb-12 max-w-lg text-base leading-relaxed">
-        We don't just take briefs — we take ownership. Here's a selection of what we've built, managed, and shipped.
+        We don't just take briefs. We take ownership. Here's a selection of what we've built, managed, and shipped.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

@@ -1,0 +1,39 @@
+---
+title: "Why your sales data is lying to you — and what to do about it"
+date: "2026-04-15"
+excerpt: "Duplicate records, inconsistent formats, and silent null values are making your reports wrong. Here is what that costs and how to fix it."
+tags: ["Data Engineering", "Business Intelligence", "Sales"]
+---
+
+Every business we have worked with in Bangladesh has the same problem: they believe their sales data.
+
+They run reports. They look at totals. They make decisions. And most of the time, those decisions are based on numbers that are partially or significantly wrong — not because the data was never collected, but because it was never cleaned.
+
+## The three ways raw data deceives you
+
+**Duplicates inflate your customer count.** A customer who bought from you twelve times might appear as three different customers in your system — because their phone number was entered differently each time, or their name was spelled two ways. Your "1,200 active customers" might really be 800.
+
+**Inconsistent formats make aggregation fail silently.** When one salesperson records an amount as "BDT 12,500" and another writes "12500.00 tk", your total column will either error out or sum only half the rows. You will not always get an error. You will sometimes just get a wrong number.
+
+**Null values hide in plain sight.** A field recorded as zero, as "N/A", as a dash, or left blank — all mean the same thing: missing data. But your system treats them as four different values. So "customers with no phone number" gives you a different count than "customers where phone is N/A". Neither count is accurate.
+
+## What this costs in practice
+
+We worked with a client who had been running monthly retention reports for over a year. When we cleaned and deduplicated their customer data, they discovered that their "churned" segment was 30% smaller than reported — because churned customers were reappearing under different contact details when they returned. Their win-back rate looked terrible. It was actually fine.
+
+The problem was not that they lacked data. They had years of it. The problem was that it had never been treated as something that required engineering.
+
+## The fix is not a dashboard
+
+A better BI tool does not solve this. Connecting your data to Power BI or Metabase before cleaning it just means you see bad numbers in a nicer chart.
+
+The fix is a data engineering layer that sits between your raw source (POS system, ERP, spreadsheets) and anything that reads from it. This layer:
+
+- Deduplicates records using fuzzy matching on name, phone, and purchase history
+- Normalises formats (phone numbers, amounts, city names, dates)
+- Flags and handles nulls consistently, rather than ignoring them
+- Validates new incoming data before it enters the clean dataset
+
+Once this layer exists, your reports become reliable. And reliable reports change how decisions get made.
+
+At Tritium Global, data engineering is one of our core services. If your sales data feels unreliable, it almost certainly is — and the fix is more tractable than you think.

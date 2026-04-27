@@ -1,0 +1,48 @@
+---
+title: "Cloud setup done wrong: 5 mistakes Bangladeshi SMEs make — and how to avoid them"
+date: "2026-03-18"
+excerpt: "Moving to the cloud is not automatically better. These five mistakes turn a cloud migration into an expensive lesson."
+tags: ["Cloud & DevOps", "Bangladesh", "Infrastructure"]
+---
+
+Every week, a company in Bangladesh decides to "move to the cloud." Sometimes this goes well. Often it does not — not because cloud infrastructure is too complicated, but because it is treated as a destination rather than a discipline.
+
+Here are the five mistakes we see most often, and what to do instead.
+
+## 1. Choosing a server size and never revisiting it
+
+The most common cloud mistake is simple: over-provisioning on day one (because someone is cautious about performance) and then never reducing it. A company pays for a large compute instance for two years when a much smaller one would have handled the actual load.
+
+Cloud cost should be reviewed at least quarterly. Most of our managed service clients see 20 to 35 percent cost reduction in the first six months just from right-sizing their infrastructure.
+
+## 2. No staging environment
+
+"We test in production" is a joke in software circles. In Bangladesh, it is often the reality — because a staging environment feels like a luxury that slows things down. This assumption is wrong.
+
+Every bug caught in staging costs a fraction of what it costs when caught in production. A production outage, a data corruption issue, or a failed deployment that brings down a live customer-facing system has real business cost. The staging environment is not optional. It is insurance.
+
+## 3. Security groups left wide open during setup, never tightened
+
+When setting up cloud infrastructure quickly, the easy path is to open all ports to all traffic and figure out the permissions later. "Later" frequently never comes.
+
+We have audited cloud environments where databases were exposed to the public internet, where SSH was open from any IP, and where production secrets were hardcoded in environment files committed to version control. None of these companies knew. The setup happened fast, nobody reviewed it, and it stayed that way.
+
+Proper security group configuration, secrets management, and access control are not advanced topics. They are the foundation.
+
+## 4. No monitoring until something breaks
+
+Most cloud setups have no alerting until an outage happens. Then alerts get set up reactively, tuned to the exact failure mode that just occurred, and left there.
+
+Monitoring should be set up before go-live: CPU, memory, disk, response time, error rate, and database connection count at minimum. Alerts should fire before thresholds are breached, not after. A well-configured monitoring setup means you often know about a problem before your users do.
+
+## 5. Treating deployment as a manual process
+
+If deploying your application requires someone to SSH into a server, pull code, restart a service, and hope it works — your deployment is a risk event. Every time.
+
+CI/CD pipelines automate this entirely. A merge to main triggers a test run, then a build, then a deployment to staging, then (with approval) a deployment to production. The process is consistent, auditable, and does not depend on a specific person being available.
+
+Setting up a basic pipeline takes a day or two. The time it saves and the failures it prevents pay for that setup within weeks.
+
+---
+
+Tritium Global manages cloud infrastructure for clients across different industries. If any of these sound familiar, get in touch. A cloud infrastructure review is usually one of the quickest wins we can deliver.

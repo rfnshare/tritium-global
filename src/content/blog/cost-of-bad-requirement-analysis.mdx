@@ -1,0 +1,46 @@
+---
+title: "The real cost of skipping requirement analysis — a field guide for decision-makers"
+date: "2026-04-01"
+excerpt: "Most software projects fail not because of bad code, but because the wrong thing was built. Requirement analysis is not a formality. It is risk management."
+tags: ["Software Development", "Project Management", "Enterprise"]
+---
+
+When a client comes to us with a software project, one of the first things we do is a structured requirement analysis. Not because it is a process we follow, but because it is the single highest-leverage activity in any software engagement.
+
+The industry has a saying: it costs ten times more to fix a requirement mistake after development than before it. From our experience, that estimate is optimistic.
+
+## What "requirement analysis" actually means
+
+It is not a meeting where you describe what you want and the developer nods. A proper requirement analysis involves:
+
+- Understanding what problem the business actually has (which is often different from what the client initially describes)
+- Mapping every user role and what they need to do
+- Identifying data flows, edge cases, and integration points
+- Defining what "done" means for each feature, in terms a test can verify
+- Documenting decisions and tradeoffs explicitly
+
+This takes time. For a medium-complexity project, it might take two to three weeks of structured discovery. For a large enterprise system, longer. Clients sometimes resist this because they want to see development start.
+
+## The failure mode when you skip it
+
+Here is the most common pattern we see: a client describes a system at a high level, development starts quickly, and eight weeks in, a fundamental assumption turns out to be wrong. Maybe the approval workflow has four levels, not two. Maybe the customer installment system needs to handle partial payments, partial refunds, and disputed amounts — not just simple monthly collections. Maybe the reporting layer needs to run on data from three separate legacy systems, not one.
+
+Each of these surprises creates rework. Rework that could have been discovered in week one of discovery is instead discovered in week eight of development, after architecture decisions have been made, after code has been written, and after both sides are frustrated.
+
+## What good requirement analysis protects
+
+When we do requirement analysis properly, we are protecting three things:
+
+**The client's budget.** Rework is expensive. A clear specification means development stays on scope.
+
+**The delivery timeline.** Surprises push dates. No surprises means predictable delivery.
+
+**The relationship.** Most vendor-client breakdowns happen over scope disputes. Clear requirements eliminate the ambiguity that creates those disputes.
+
+## For decision-makers evaluating vendors
+
+Ask any vendor you are considering: what does your discovery process look like? How do you document requirements? What does your sign-off process look like before development starts?
+
+If the answer is vague, that is a risk. A vendor who is eager to start building before requirements are clear is usually a vendor who is not yet thinking about what happens when something is wrong.
+
+At Tritium Global, we treat requirement analysis as a deliverable in itself. Clients receive a documented specification that we both agree on before a single line of production code is written.

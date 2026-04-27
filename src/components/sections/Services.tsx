@@ -12,7 +12,7 @@ const icons: Record<string, string> = {
 const outcomeHints: Record<string, string> = {
   'end-to-end-software': 'One vendor, full accountability.',
   'cloud-devops': 'Infrastructure that runs, so you don\'t have to worry.',
-  'data-engineering': 'Your data — finally usable.',
+  'data-engineering': 'Your data, finally usable.',
   'dedicated-team': 'Senior capacity, zero hiring overhead.',
 }
 
@@ -26,7 +26,7 @@ export function Services({ services }: { services: Service[] }) {
         Four ways we deliver value
       </h2>
       <p className="text-muted mb-12 max-w-lg text-base leading-relaxed">
-        From a full product build to an embedded dedicated team — we match our engagement model to what you actually need.
+        From a full product build to an embedded dedicated team. We match our engagement model to what you actually need.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

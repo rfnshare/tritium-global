@@ -22,7 +22,7 @@ const stats = [
 export function Hero() {
   return (
     <section className="section-pad mx-auto max-w-7xl pt-20 pb-24 relative overflow-hidden">
-      {/* Subtle radial glow — visible in both modes */}
+      {/* Subtle radial glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-[0.07] dark:opacity-[0.12]"
@@ -38,7 +38,7 @@ export function Hero() {
         Enterprise Software · Data Engineering · Cloud &amp; DevOps
       </motion.div>
 
-      {/* Headline — business-impact focused */}
+      {/* Headline */}
       <motion.h1
         {...fadeUp(0.08)}
         className="text-5xl md:text-6xl font-medium tracking-tight leading-[1.08] mb-6 max-w-3xl text-zinc-900 dark:text-zinc-50"
@@ -47,12 +47,12 @@ export function Hero() {
         <span className="text-brand-600">business runs on.</span>
       </motion.h1>
 
-      {/* Trust-building subheadline */}
+      {/* Subheadline — em-dashes removed, clean punctuation */}
       <motion.p
         {...fadeUp(0.16)}
         className="text-lg text-zinc-500 dark:text-zinc-400 max-w-xl leading-relaxed mb-3"
       >
-        From first requirement to final delivery — Tritium Global builds reliable
+        From first requirement to final delivery, Tritium Global builds reliable
         software systems, structured data infrastructure, and cloud environments
         that enterprises and growing companies depend on.
       </motion.p>

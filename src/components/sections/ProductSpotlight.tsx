@@ -19,7 +19,7 @@ export function ProductSpotlight() {
               <StatusBadge status={product.status} />
             </div>
             <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-md">
-              {product.tagline} — now open for early access applications.
+              {product.tagline}. Early access applications now open.
             </p>
           </div>
         </div>
