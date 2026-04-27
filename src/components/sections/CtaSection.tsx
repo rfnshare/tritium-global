@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { siteInfo } from '@/lib/site'
+import { siteConfig } from '@/lib/config'
 
 export function CtaSection() {
+  const featuredProduct = siteConfig.products.find((p) => p.visible)
   return (
     <section className="section-pad mx-auto max-w-7xl pb-24">
       <div className="rounded-2xl bg-brand-800 dark:bg-brand-900 px-8 md:px-14 py-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative overflow-hidden">
@@ -34,12 +36,14 @@ export function CtaSection() {
           >
             Schedule a consultation
           </Link>
-          <Link
-            href="/products/eshoopi"
-            className="text-xs text-brand-200 hover:text-white transition-colors underline underline-offset-2"
-          >
-            Or explore eShoopi, our B2B intelligence product →
-          </Link>
+          {featuredProduct && (
+            <Link
+              href={`/products/${featuredProduct.id}`}
+              className="text-xs text-brand-200 hover:text-white transition-colors underline underline-offset-2"
+            >
+              Or explore {featuredProduct.name} →
+            </Link>
+          )}
           {/* White text for visibility on dark teal background */}
           <p className="text-xs text-white/60 mt-1">
             {siteInfo.contact.email} · {siteInfo.contact.phone}

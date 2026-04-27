@@ -15,10 +15,10 @@ export const siteInfo = {
   },
 
   address: {
-    line1: 'House 12, Road 5',
-    line2: 'Maniknagar, Dhaka 1203',
+    line1: '16/1, Demra',
+    line2: 'Dhaka - 1203',
     country: 'Bangladesh',
-    mapUrl: 'https://maps.google.com/maps?q=Uttara+Dhaka+1230+Bangladesh',
+    mapUrl: 'https://maps.app.goo.gl/v46b5pB69Fo1FFys8',
   },
 
   social: {

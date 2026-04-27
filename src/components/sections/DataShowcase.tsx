@@ -10,13 +10,13 @@ import { cn } from '@/lib/utils'
 const cols = ['cust_id', 'full_name', 'mobile', 'email', 'city', 'amt_bdt'] as const
 
 const rawRows = [
-  { cust_id: 'NULL',  full_name: 'ahmed r.',      mobile: '01711 ??????',   email: 'ahmed_r',          city: 'dhaka',       amt_bdt: '"12,500 tk"'  },
-  { cust_id: '1042',  full_name: 'AHMED RAHMAN',  mobile: '+88 01711234',   email: 'ahmed@mail',       city: 'DHAKA',       amt_bdt: '12500'         },
-  { cust_id: '1042',  full_name: 'Ahmed R.',       mobile: '01711-1234',     email: 'ahmed@mail.com',   city: 'Dhaka',       amt_bdt: 'BDT12,500'     },
-  { cust_id: '1043',  full_name: 'farida b',       mobile: 'N/A',            email: '',                 city: 'ctg',         amt_bdt: '5000tk'        },
-  { cust_id: '1044',  full_name: 'MD KARIM',       mobile: '017 22 33 444',  email: 'karim@biz.com',    city: 'sylhet',      amt_bdt: '#N/A'          },
-  { cust_id: '0',     full_name: 'RINA ISLAM',     mobile: '01900-112233',   email: 'rina.@gmail',      city: 'Chittagong',  amt_bdt: '0'             },
-  { cust_id: '1045',  full_name: '',               mobile: '1800456789',     email: 'sales@co.com',     city: 'DK',          amt_bdt: '15,000.00'     },
+  { bad: true,  cust_id: 'NULL',  full_name: 'ahmed r.',      mobile: '01711 ??????',   email: 'ahmed_r',          city: 'dhaka',       amt_bdt: '"12,500 tk"'  },
+  { bad: true,  cust_id: '1042',  full_name: 'AHMED RAHMAN',  mobile: '+88 01711234',   email: 'ahmed@mail',       city: 'DHAKA',       amt_bdt: '12500'         },
+  { bad: true,  cust_id: '1042',  full_name: 'Ahmed R.',       mobile: '01711-1234',     email: 'ahmed@mail.com',   city: 'Dhaka',       amt_bdt: 'BDT12,500'     },
+  { bad: true,  cust_id: '1043',  full_name: 'farida b',       mobile: 'N/A',            email: '',                 city: 'ctg',         amt_bdt: '5000tk'        },
+  { bad: true,  cust_id: '1044',  full_name: 'MD KARIM',       mobile: '017 22 33 444',  email: 'karim@biz.com',    city: 'sylhet',      amt_bdt: '#N/A'          },
+  { bad: true,  cust_id: '0',     full_name: 'RINA ISLAM',     mobile: '01900-112233',   email: 'rina.@gmail',      city: 'Chittagong',  amt_bdt: '0'             },
+  { bad: true,  cust_id: '1045',  full_name: '',               mobile: '1800456789',     email: 'sales@co.com',     city: 'DK',          amt_bdt: '15,000.00'     },
 ]
 
 const cleanRows = [
@@ -25,12 +25,6 @@ const cleanRows = [
   { cust_id: '1044', full_name: 'Md. Karim',     mobile: '+8801722334440', email: 'karim@biz.com',   city: 'Sylhet',      amt_bdt: '8,000.00'  },
   { cust_id: '1045', full_name: 'Rina Islam',    mobile: '+8801900112233', email: '—',           city: 'Chittagong',  amt_bdt: '15,000.00' },
 ]
-
-/* A row is problematic if it has a bad value */
-const BAD = new Set(['NULL', '0', 'N/A', '#N/A', '', 'AHMED RAHMAN', 'AHMED R.', 'ahmed r.', 'MD KARIM', 'RINA ISLAM', 'farida b', 'DHAKA', 'ctg', 'sylhet', 'DK'])
-function isRowBad(row: Record<string, string>, idx: number) {
-  return idx === 0 || idx === 2 || Object.values(row).some(v => BAD.has(v) || v.includes('??????') || v.includes('"') || v.includes('BDT') || v.endsWith('tk'))
-}
 
 /* ─── Pipeline steps ────────────────────────────────────────────── */
 
@@ -177,24 +171,21 @@ export function DataShowcase() {
                   </tr>
                 </thead>
                 <tbody>
-                  {rawRows.map((row, i) => {
-                    const bad = isRowBad(row as Record<string, string>, i)
-                    return (
-                      <tr key={i} className="border-b border-red-50 dark:border-red-900/20 last:border-0">
-                        {cols.map(c => (
-                          <td
-                            key={c}
-                            className={cn(
-                              'px-4 py-1.5 whitespace-nowrap',
-                              bad ? 'text-red-500 dark:text-red-400' : 'text-zinc-600 dark:text-zinc-300'
-                            )}
-                          >
-                            {(row as Record<string, string>)[c] || <span className="italic text-zinc-300 dark:text-zinc-600">(blank)</span>}
-                          </td>
-                        ))}
-                      </tr>
-                    )
-                  })}
+                  {rawRows.map((row, i) => (
+                    <tr key={i} className="border-b border-red-50 dark:border-red-900/20 last:border-0">
+                      {cols.map(c => (
+                        <td
+                          key={c}
+                          className={cn(
+                            'px-4 py-1.5 whitespace-nowrap',
+                            row.bad ? 'text-red-500 dark:text-red-400' : 'text-zinc-600 dark:text-zinc-300'
+                          )}
+                        >
+                          {(row as Record<string, string>)[c] || <span className="italic text-zinc-300 dark:text-zinc-600">(blank)</span>}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

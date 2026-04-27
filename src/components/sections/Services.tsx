@@ -8,14 +8,6 @@ const icons: Record<string, string> = {
   team: '👥',
 }
 
-/* Business-outcome descriptions layered onto the taglines */
-const outcomeHints: Record<string, string> = {
-  'end-to-end-software': 'One vendor, full accountability.',
-  'cloud-devops': 'Infrastructure that runs, so you don\'t have to worry.',
-  'data-engineering': 'Your data, finally usable.',
-  'dedicated-team': 'Senior capacity, zero hiring overhead.',
-}
-
 export function Services({ services }: { services: Service[] }) {
   return (
     <section className="section-pad mx-auto max-w-7xl py-24 border-t border-zinc-100 dark:border-zinc-800">
@@ -47,9 +39,9 @@ export function Services({ services }: { services: Service[] }) {
                 {service.title}
               </h3>
               <p className="text-sm text-muted leading-relaxed mb-1">{service.tagline}</p>
-              {outcomeHints[service.slug] && (
+              {service.outcome && (
                 <p className="text-xs font-medium text-brand-600 dark:text-brand-500 mb-4">
-                  {outcomeHints[service.slug]}
+                  {service.outcome}
                 </p>
               )}
               <div className="flex flex-wrap gap-2">

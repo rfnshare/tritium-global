@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { siteConfig } from '@/lib/config'
+import type { ProductStatus } from '@/types/content'
+
+const statusCopy: Record<ProductStatus, string> = {
+  'early-access': 'Early access applications now open.',
+  'coming-soon': 'Join the waitlist.',
+  'live': 'Now available.',
+}
 
 export function ProductSpotlight() {
   const product = siteConfig.products.find((p) => p.visible)
@@ -19,7 +26,7 @@ export function ProductSpotlight() {
               <StatusBadge status={product.status} />
             </div>
             <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-md">
-              {product.tagline}. Early access applications now open.
+              {product.tagline}. {statusCopy[product.status]}
             </p>
           </div>
         </div>

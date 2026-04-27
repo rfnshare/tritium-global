@@ -14,6 +14,7 @@ export type Service = {
   title: string
   tagline: string
   description: string
+  outcome?: string
   tags: string[]
   icon: string
   order: number
@@ -41,6 +42,12 @@ export type Product = {
   visible: boolean
 }
 
+export type WhyUsItem = {
+  num: string
+  title: string
+  desc: string
+}
+
 export type SiteConfig = {
   productBanner: {
     enabled: boolean
@@ -52,4 +59,5 @@ export type SiteConfig = {
     style: 'banner' | 'hero-section'
   }
   products: Product[]
+  whyUs: WhyUsItem[]
 }
