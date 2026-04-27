@@ -6,6 +6,17 @@ import { siteInfo } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Contact',
   description: 'Get in touch with Tritium Global for project inquiries, partnerships, or consultations.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact | Tritium Global',
+    description: 'Get in touch with Tritium Global for project inquiries, partnerships, or consultations.',
+    url: '/contact',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact | Tritium Global',
+    description: 'Get in touch with Tritium Global for project inquiries, partnerships, or consultations.',
+  },
 }
 
 export default function ContactPage() {

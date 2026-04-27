@@ -7,6 +7,17 @@ export const metadata: Metadata = {
   title: 'eShoopi — B2B Customer Intelligence for Bangladesh Retail',
   description:
     'eShoopi turns your raw sales data into actionable customer profiles built for the Bangladesh B2B retail market.',
+  alternates: { canonical: '/products/eshoopi' },
+  openGraph: {
+    title: 'eShoopi — B2B Customer Intelligence for Bangladesh Retail',
+    description: 'eShoopi turns your raw sales data into actionable customer profiles built for the Bangladesh B2B retail market.',
+    url: '/products/eshoopi',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'eShoopi — B2B Customer Intelligence for Bangladesh Retail',
+    description: 'eShoopi turns your raw sales data into actionable customer profiles built for the Bangladesh B2B retail market.',
+  },
 }
 
 const product = siteConfig.products.find((p) => p.id === 'eshoopi')!

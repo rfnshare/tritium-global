@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getAllProjects, getProjectBySlug } from '@/lib/content'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { siteInfo } from '@/lib/site'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -14,7 +16,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const project = getProjectBySlug(slug)
   if (!project) return { title: 'Not Found' }
-  return { title: project.title, description: project.description }
+  return {
+    title: project.title,
+    description: project.description,
+    alternates: { canonical: `/projects/${slug}` },
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      url: `/projects/${slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.description,
+    },
+  }
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -24,6 +40,15 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <div className="section-pad mx-auto max-w-4xl py-20">
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: siteInfo.url },
+          { '@type': 'ListItem', position: 2, name: 'Projects', item: `${siteInfo.url}/projects` },
+          { '@type': 'ListItem', position: 3, name: project.title, item: `${siteInfo.url}/projects/${project.slug}` },
+        ],
+      }} />
       <Link href="/projects" className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-10 inline-flex items-center gap-1.5">
         ← All projects
       </Link>

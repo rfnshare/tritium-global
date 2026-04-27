@@ -5,6 +5,17 @@ import { getAllProjects } from '@/lib/content'
 export const metadata: Metadata = {
   title: 'Projects',
   description: 'Enterprise software, cloud DevOps, and data engineering projects delivered by Tritium Global.',
+  alternates: { canonical: '/projects' },
+  openGraph: {
+    title: 'Projects | Tritium Global',
+    description: 'Enterprise software, cloud DevOps, and data engineering projects delivered by Tritium Global.',
+    url: '/projects',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Projects | Tritium Global',
+    description: 'Enterprise software, cloud DevOps, and data engineering projects delivered by Tritium Global.',
+  },
 }
 
 const industryColors: Record<string, string> = {

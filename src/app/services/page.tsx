@@ -5,6 +5,17 @@ import { MDXRenderer } from '@/components/ui/MDXRenderer'
 export const metadata: Metadata = {
   title: 'Services',
   description: 'End-to-end software, cloud & DevOps, data engineering, and dedicated team services from Tritium Global.',
+  alternates: { canonical: '/services' },
+  openGraph: {
+    title: 'Services | Tritium Global',
+    description: 'End-to-end software, cloud & DevOps, data engineering, and dedicated team services from Tritium Global.',
+    url: '/services',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Services | Tritium Global',
+    description: 'End-to-end software, cloud & DevOps, data engineering, and dedicated team services from Tritium Global.',
+  },
 }
 
 const icons: Record<string, string> = {

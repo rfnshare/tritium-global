@@ -5,6 +5,17 @@ import { getAllBlogPosts } from '@/lib/content'
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Insights on data engineering, software delivery, and cloud infrastructure from the Tritium Global team.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'Blog | Tritium Global',
+    description: 'Insights on data engineering, software delivery, and cloud infrastructure from the Tritium Global team.',
+    url: '/blog',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | Tritium Global',
+    description: 'Insights on data engineering, software delivery, and cloud infrastructure from the Tritium Global team.',
+  },
 }
 
 export default function BlogPage() {

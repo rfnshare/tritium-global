@@ -181,7 +181,7 @@ export function DataShowcase() {
                             row.bad ? 'text-red-500 dark:text-red-400' : 'text-zinc-600 dark:text-zinc-300'
                           )}
                         >
-                          {(row as Record<string, string>)[c] || <span className="italic text-zinc-300 dark:text-zinc-600">(blank)</span>}
+                          {row[c] || <span className="italic text-zinc-300 dark:text-zinc-600">(blank)</span>}
                         </td>
                       ))}
                     </tr>

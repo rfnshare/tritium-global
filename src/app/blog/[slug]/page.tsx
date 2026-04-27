@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/content'
 import { MDXRenderer } from '@/components/ui/MDXRenderer'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { siteInfo } from '@/lib/site'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -14,7 +16,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getBlogPostBySlug(slug)
   if (!post) return { title: 'Not Found' }
-  return { title: post.title, description: post.excerpt }
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      type: 'article',
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${slug}`,
+      publishedTime: new Date(post.date).toISOString(),
+      tags: post.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+    },
+  }
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -24,6 +43,26 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div className="section-pad mx-auto max-w-3xl py-20">
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: new Date(post.date).toISOString(),
+        author: { '@type': 'Organization', name: siteInfo.name, url: siteInfo.url },
+        publisher: { '@type': 'Organization', name: siteInfo.name, url: siteInfo.url },
+        url: `${siteInfo.url}/blog/${post.slug}`,
+        keywords: post.tags.join(', '),
+      }} />
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: siteInfo.url },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteInfo.url}/blog` },
+          { '@type': 'ListItem', position: 3, name: post.title, item: `${siteInfo.url}/blog/${post.slug}` },
+        ],
+      }} />
       <Link href="/blog" className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-10 inline-flex items-center gap-1.5">
         ← All posts
       </Link>
